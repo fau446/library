@@ -25,6 +25,12 @@ function displayBooks() {
   }
 }
 
+let addBook = document.querySelector(".add-book")
+addBook.addEventListener("click", function () {
+  let form = document.querySelector("form")
+  form.className = form.className === 'hidden' ? '' : 'hidden'
+})
+
 addBookToLibrary('Bob', 'Tyrants', false)
 addBookToLibrary('Jeebus Heebus', 'Joe', true)
 displayBooks()
