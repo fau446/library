@@ -13,26 +13,29 @@
 
   </table>
 
-  <form action="" method="get" class="hidden">
-    <div class="form-row">
-      <label for="book-name">Book Name:</label>
-      <input type="text" name="book-name" id="book-name">
-    </div>
-    <div class="form-row">
-      <label for="author">Author:</label>
-      <input type="text" name="author" id="author">
-    </div>
-    <div class="form-row">
-      <fieldset>
-        <legend>Have you read the book?</legend>
-        <input type="radio" name="read" id="true" value="true" checked>
-        <label for="true">Yes</label>
-        <input type="radio" name="read" id="false" value="false">
-        <label for="false">No</label>
-      </fieldset>
-    </div>
-    <button>Submit</button>
-  </form>
+  <div class="modal" id="modal">
+    <form action="" method="get">
+      <div class="form-row">
+        <label for="book-name">Book Name:</label>
+        <input type="text" name="book-name" id="book-name" required>
+      </div>
+      <div class="form-row">
+        <label for="author">Author:</label>
+        <input type="text" name="author" id="author" required>
+      </div>
+      <div class="form-row">
+        <fieldset>
+          <legend>Have you read the book?</legend>
+          <input type="radio" name="read" id="true" value="true" checked>
+          <label for="true">Yes</label>
+          <input type="radio" name="read" id="false" value="false">
+          <label for="false">No</label>
+        </fieldset>
+      </div>
+      <button>Submit</button>
+    </form>
+  </div>
+  <div class="" id="overlay"></div>
 
   <script src="script.js"></script>
 </body>
