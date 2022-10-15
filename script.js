@@ -26,11 +26,34 @@ function displayBooks() {
 }
 
 let addBook = document.querySelector(".add-book")
+let modal = document.querySelector(".modal")
+let overlay = document.querySelector("#overlay")
 addBook.addEventListener("click", function () {
-  let form = document.querySelector("form")
-  form.className = form.className === 'hidden' ? '' : 'hidden'
+  modal.classList.add("active")
+  overlay.classList.add("active")
+})
+
+overlay.addEventListener("click", function () {
+  modal.classList.remove("active")
+  overlay.classList.remove("active")
 })
 
 addBookToLibrary('Bob', 'Tyrants', false)
+addBookToLibrary('Jeebus Heebus', 'Joe', true)
+addBookToLibrary('Jeebus Heebus', 'Joe', true)
+addBookToLibrary('Bob', 'Tyrants', false)
+addBookToLibrary('Jeebus Heebus', 'Joe', true)
+addBookToLibrary('Jeebus Heebus', 'Joe', true)
+addBookToLibrary('Bob', 'Tyrants', false)
+addBookToLibrary('Jeebus Heebus', 'Joe', true)
+addBookToLibrary('Jeebus Heebus', 'Joe', true)
+addBookToLibrary('Bob', 'Tyrants', false)
+addBookToLibrary('Jeebus Heebus', 'Joe', true)
+addBookToLibrary('Jeebus Heebus', 'Joe', true)
+addBookToLibrary('Bob', 'Tyrants', false)
+addBookToLibrary('Jeebus Heebus', 'Joe', true)
+addBookToLibrary('Jeebus Heebus', 'Joe', true)
+addBookToLibrary('Bob', 'Tyrants', false)
+addBookToLibrary('Jeebus Heebus', 'Joe', true)
 addBookToLibrary('Jeebus Heebus', 'Joe', true)
 displayBooks()
