@@ -15,7 +15,7 @@ function addBookToLibrary(name, author, pages, isRead) {
 function displayBooks() {
   let table = document.querySelector(".books")
   for (let i = 0; i < myLibrary.length; i++) {
-    let row = table.insertRow(i)
+    let row = table.insertRow(i + 1)
     let nameCell = row.insertCell(0)
     let authorCell = row.insertCell(1)
     let pageCell = row.insertCell(2)
@@ -44,3 +44,4 @@ overlay.addEventListener("click", function () {
 addBookToLibrary('Bob', 'Tyrants', 150, false)
 addBookToLibrary('Jeebus Heebus', 'Joe', 256, true)
 displayBooks()
+console.log(myLibrary)
