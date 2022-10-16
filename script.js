@@ -28,20 +28,36 @@ function displayBooks() {
   }
 }
 
-let addBook = document.querySelector(".add-book")
-let modal = document.querySelector(".modal")
-let overlay = document.querySelector("#overlay")
-addBook.addEventListener("click", function () {
+function displayModal(modal) {
   modal.classList.add("active")
   overlay.classList.add("active")
+}
+
+function hideModal(modal) {
+  modal.classList.remove("active")
+  overlay.classList.remove("active")
+}
+
+let addBook = document.querySelector(".add-book")
+let overlay = document.querySelector("#overlay")
+let submitButton = document.querySelector(".submit")
+addBook.addEventListener("click", function() {
+  let modal = document.querySelector(".modal")
+  displayModal(modal)
 })
 
-overlay.addEventListener("click", function () {
+overlay.addEventListener("click", function() {
+  let modal = document.querySelector(".modal")
+  hideModal(modal)
+})
+
+submitButton.addEventListener("click", function() {
+  let bookName = document.querySelector("#book-name")
+  let author = document.querySelector("#author")
+  let pages = document.querySelector("#pages")
+  let isRead = document.querySelector("input[name='read']:checked")
+  addBookToLibrary(bookName.value, author.value, pages.value, isRead.value)
+  displayBooks()
   modal.classList.remove("active")
   overlay.classList.remove("active")
 })
-
-addBookToLibrary('Bob', 'Tyrants', 150, false)
-addBookToLibrary('Jeebus Heebus', 'Joe', 256, true)
-displayBooks()
-console.log(myLibrary)
