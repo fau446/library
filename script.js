@@ -14,6 +14,7 @@ function addBookToLibrary(name, author, pages, isRead) {
 
 function displayBooks() {
   let table = document.querySelector(".books")
+  resetTable(table)
   for (let i = 0; i < myLibrary.length; i++) {
     let row = table.insertRow(i + 1)
     let nameCell = row.insertCell(0)
@@ -25,6 +26,17 @@ function displayBooks() {
     authorCell.innerHTML = myLibrary[i].author
     pageCell.innerHTML = myLibrary[i].pages
     isReadCell.innerHTML = myLibrary[i].isRead
+  }
+}
+
+function resetTable(table) {
+  let tableRowLength = table.rows.length
+  if (tableRowLength === 1) {
+    return
+  }
+  
+  for (let i = 1; i < tableRowLength; i++) {
+    table.deleteRow(1)
   }
 }
 
@@ -58,6 +70,5 @@ submitButton.addEventListener("click", function() {
   let isRead = document.querySelector("input[name='read']:checked")
   addBookToLibrary(bookName.value, author.value, pages.value, isRead.value)
   displayBooks()
-  modal.classList.remove("active")
-  overlay.classList.remove("active")
+  hideModal(modal)
 })
