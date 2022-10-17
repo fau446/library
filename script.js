@@ -1,4 +1,4 @@
-let myLibrary = [];
+let myLibrary = []
 
 function Book(name, author, pages, isRead) {
   this.name = name
@@ -50,6 +50,13 @@ function hideModal(modal) {
   overlay.classList.remove("active")
 }
 
+function resetInputFields(bookName, author, pages) {
+  bookName.value = ''
+  author.value = ''
+  pages.value = ''
+  document.querySelector("#true").checked = true
+}
+
 let addBook = document.querySelector(".add-book")
 let overlay = document.querySelector("#overlay")
 let submitButton = document.querySelector(".submit")
@@ -71,4 +78,5 @@ submitButton.addEventListener("click", function() {
   addBookToLibrary(bookName.value, author.value, pages.value, isRead.value)
   displayBooks()
   hideModal(modal)
+  resetInputFields(bookName, author, pages)
 })
