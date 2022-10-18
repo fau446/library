@@ -17,15 +17,27 @@ function displayBooks() {
   resetTable(table)
   for (let i = 0; i < myLibrary.length; i++) {
     let row = table.insertRow(i + 1)
+    row.dataset.indexNumber = i
     let nameCell = row.insertCell(0)
     let authorCell = row.insertCell(1)
     let pageCell = row.insertCell(2)
     let isReadCell = row.insertCell(3)
+    let delButtonCell = row.insertCell(4)
 
     nameCell.innerHTML = myLibrary[i].name
     authorCell.innerHTML = myLibrary[i].author
     pageCell.innerHTML = myLibrary[i].pages
     isReadCell.innerHTML = myLibrary[i].isRead
+
+    let delBtn = document.createElement("button")
+    delBtn.innerHTML = "Delete"
+    delBtn.classList.add("delete")
+    delBtn.dataset.indexNumber = i
+    delBtn.onclick = function() {
+      myLibrary.splice(delBtn.dataset.indexNumber, 1)
+      displayBooks()
+    }
+    delButtonCell.appendChild(delBtn)
   }
 }
 
