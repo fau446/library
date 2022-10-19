@@ -29,9 +29,7 @@ function displayBooks() {
     pageCell.innerHTML = myLibrary[i].pages
     isReadCell.innerHTML = myLibrary[i].isRead
 
-    let delBtn = document.createElement("button")
-    delBtn.innerHTML = "Delete"
-    delBtn.classList.add("delete")
+    let delBtn = createBtn("Delete")
     delBtn.dataset.indexNumber = i
     delBtn.onclick = function() {
       myLibrary.splice(delBtn.dataset.indexNumber, 1)
@@ -39,6 +37,13 @@ function displayBooks() {
     }
     delBtnCell.appendChild(delBtn)
   }
+}
+
+function createBtn(btnName) {
+  let btn = document.createElement("button")
+  btn.innerHTML = `${btnName}`
+  btn.classList.add(`${btnName.toLowerCase()}`)
+  return btn
 }
 
 function resetTable(table) {
