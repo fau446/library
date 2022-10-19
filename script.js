@@ -23,25 +23,35 @@ function displayBooks() {
     let pageCell = row.insertCell(2)
     let isReadCell = row.insertCell(3)
     let delBtnCell = row.insertCell(4)
+    let readBtnCell = row.insertCell(5)
 
     nameCell.innerHTML = myLibrary[i].name
     authorCell.innerHTML = myLibrary[i].author
     pageCell.innerHTML = myLibrary[i].pages
     isReadCell.innerHTML = myLibrary[i].isRead
 
-    let delBtn = createBtn("Delete", i)
+    let delBtn = createBtn("delete", i)
+    delBtn.innerHTML = "Delete"
     delBtn.onclick = function() {
       myLibrary.splice(delBtn.dataset.indexNumber, 1)
       displayBooks()
     }
     delBtnCell.appendChild(delBtn)
+
+    let readBtn = createBtn("read-btn", i)
+    readBtn.innerHTML = isReadCell.innerHTML === "Read" ? "Not read" : "Read"
+    readBtn.onclick = function() {
+      myLibrary[i].isRead = myLibrary[i].isRead === "Read" ? "Not read" : "Read"
+      isReadCell.innerHTML = myLibrary[i].isRead
+      readBtn.innerHTML = isReadCell.innerHTML === "Read" ? "Not read" : "Read"
+    }
+    readBtnCell.appendChild(readBtn)
   }
 }
 
-function createBtn(btnName, i) {
+function createBtn(className, i) {
   let btn = document.createElement("button")
-  btn.innerHTML = `${btnName}`
-  btn.classList.add(`${btnName.toLowerCase()}`)
+  btn.classList.add(`${className}`)
   btn.dataset.indexNumber = i
   return btn
 }
