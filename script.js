@@ -22,7 +22,7 @@ function displayBooks() {
     let authorCell = row.insertCell(1)
     let pageCell = row.insertCell(2)
     let isReadCell = row.insertCell(3)
-    let delButtonCell = row.insertCell(4)
+    let delBtnCell = row.insertCell(4)
 
     nameCell.innerHTML = myLibrary[i].name
     authorCell.innerHTML = myLibrary[i].author
@@ -37,7 +37,7 @@ function displayBooks() {
       myLibrary.splice(delBtn.dataset.indexNumber, 1)
       displayBooks()
     }
-    delButtonCell.appendChild(delBtn)
+    delBtnCell.appendChild(delBtn)
   }
 }
 
@@ -71,7 +71,7 @@ function resetInputFields(bookName, author, pages) {
 
 let addBook = document.querySelector(".add-book")
 let overlay = document.querySelector("#overlay")
-let submitButton = document.querySelector(".submit")
+let submitBtn = document.querySelector(".submit")
 addBook.addEventListener("click", function() {
   let modal = document.querySelector(".modal")
   displayModal(modal)
@@ -82,7 +82,7 @@ overlay.addEventListener("click", function() {
   hideModal(modal)
 })
 
-submitButton.addEventListener("click", function() {
+submitBtn.addEventListener("click", function() {
   let bookName = document.querySelector("#book-name")
   let author = document.querySelector("#author")
   let pages = document.querySelector("#pages")
