@@ -4,7 +4,7 @@ function Book(name, author, pages, isRead) {
   this.name = name
   this.author = author
   this.pages = pages
-  this.isRead = isRead
+  this.isRead = isRead === "true" ? "Read" : "Not read"
 }
 
 function addBookToLibrary(name, author, pages, isRead) {
@@ -29,8 +29,7 @@ function displayBooks() {
     pageCell.innerHTML = myLibrary[i].pages
     isReadCell.innerHTML = myLibrary[i].isRead
 
-    let delBtn = createBtn("Delete")
-    delBtn.dataset.indexNumber = i
+    let delBtn = createBtn("Delete", i)
     delBtn.onclick = function() {
       myLibrary.splice(delBtn.dataset.indexNumber, 1)
       displayBooks()
@@ -39,10 +38,11 @@ function displayBooks() {
   }
 }
 
-function createBtn(btnName) {
+function createBtn(btnName, i) {
   let btn = document.createElement("button")
   btn.innerHTML = `${btnName}`
   btn.classList.add(`${btnName.toLowerCase()}`)
+  btn.dataset.indexNumber = i
   return btn
 }
 
