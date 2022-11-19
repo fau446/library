@@ -1,21 +1,51 @@
-let myLibrary = []
-
-function Book(name, author, pages, isRead) {
-  this.name = name
-  this.author = author
-  this.pages = pages
-  this.isRead = isRead === "true" ? "Read" : "Not read"
+class Book {
+  constructor(name, author, pages, isRead) {
+    this.name = name
+    this.author = author
+    this.pages = pages
+    this.isRead = isRead === "true" ? "Read" : "Not read"
+  }
 }
 
-function addBookToLibrary(name, author, pages, isRead) {
-  const newBook = new Book(name, author, pages, isRead)
-  myLibrary.push(newBook)
+class Library {
+  constructor() {
+    this.myLibrary = []
+  }
+
+  addBookToLibrary(name, author, pages, isRead) {
+    const newBook = new Book(name, author, pages, isRead)
+    this.myLibrary.push(newBook)
+  }
+}
+
+let library = new Library
+
+//cache DOM
+let addBook = document.querySelector(".add-book")
+let table = document.querySelector(".books")
+let overlay = document.querySelector("#overlay")
+let submitBtn = document.querySelector(".submit")
+let modal = document.querySelector(".modal")
+let bookName = document.querySelector("#book-name")
+let author = document.querySelector("#author")
+let pages = document.querySelector("#pages")
+let isRead = document.querySelector("input[name='read']:checked")
+
+//bind events
+addBook.addEventListener("click", displayModal)
+overlay.addEventListener("click", hideModal)
+submitBtn.addEventListener("click", submitBook)
+
+function submitBook() {
+  library.addBookToLibrary(bookName.value, author.value, pages.value, isRead.value)
+  displayBooks()
+  hideModal()
+  resetInputFields(bookName, author, pages)
 }
 
 function displayBooks() {
-  let table = document.querySelector(".books")
   resetTable(table)
-  for (let i = 0; i < myLibrary.length; i++) {
+  for (let i = 0; i < library.myLibrary.length; i++) {
     let row = table.insertRow(i + 1)
     row.dataset.indexNumber = i
     let nameCell = row.insertCell(0)
@@ -25,15 +55,15 @@ function displayBooks() {
     let delBtnCell = row.insertCell(4)
     let readBtnCell = row.insertCell(5)
 
-    nameCell.innerHTML = myLibrary[i].name
-    authorCell.innerHTML = myLibrary[i].author
-    pageCell.innerHTML = myLibrary[i].pages
-    isReadCell.innerHTML = myLibrary[i].isRead
+    nameCell.innerHTML = library.myLibrary[i].name
+    authorCell.innerHTML = library.myLibrary[i].author
+    pageCell.innerHTML = library.myLibrary[i].pages
+    isReadCell.innerHTML = library.myLibrary[i].isRead
 
     let delBtn = createBtn("delete", i)
     delBtn.innerHTML = "Delete"
     delBtn.onclick = function() {
-      myLibrary.splice(delBtn.dataset.indexNumber, 1)
+      library.myLibrary.splice(delBtn.dataset.indexNumber, 1)
       displayBooks()
     }
     delBtnCell.appendChild(delBtn)
@@ -41,8 +71,8 @@ function displayBooks() {
     let readBtn = createBtn("read-btn", i)
     readBtn.innerHTML = isReadCell.innerHTML === "Read" ? "Not read" : "Read"
     readBtn.onclick = function() {
-      myLibrary[i].isRead = myLibrary[i].isRead === "Read" ? "Not read" : "Read"
-      isReadCell.innerHTML = myLibrary[i].isRead
+      library.myLibrary[i].isRead = library.myLibrary[i].isRead === "Read" ? "Not read" : "Read"
+      isReadCell.innerHTML = library.myLibrary[i].isRead
       readBtn.innerHTML = isReadCell.innerHTML === "Read" ? "Not read" : "Read"
     }
     readBtnCell.appendChild(readBtn)
@@ -67,12 +97,12 @@ function resetTable(table) {
   }
 }
 
-function displayModal(modal) {
+function displayModal() {
   modal.classList.add("active")
   overlay.classList.add("active")
 }
 
-function hideModal(modal) {
+function hideModal() {
   modal.classList.remove("active")
   overlay.classList.remove("active")
 }
@@ -83,27 +113,3 @@ function resetInputFields(bookName, author, pages) {
   pages.value = ''
   document.querySelector("#true").checked = true
 }
-
-let addBook = document.querySelector(".add-book")
-let overlay = document.querySelector("#overlay")
-let submitBtn = document.querySelector(".submit")
-addBook.addEventListener("click", function() {
-  let modal = document.querySelector(".modal")
-  displayModal(modal)
-})
-
-overlay.addEventListener("click", function() {
-  let modal = document.querySelector(".modal")
-  hideModal(modal)
-})
-
-submitBtn.addEventListener("click", function() {
-  let bookName = document.querySelector("#book-name")
-  let author = document.querySelector("#author")
-  let pages = document.querySelector("#pages")
-  let isRead = document.querySelector("input[name='read']:checked")
-  addBookToLibrary(bookName.value, author.value, pages.value, isRead.value)
-  displayBooks()
-  hideModal(modal)
-  resetInputFields(bookName, author, pages)
-})
